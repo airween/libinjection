@@ -525,7 +525,15 @@ static int cstrcasecmp_with_null(const char *a, const char *b, size_t n)
 {
     char ca;
     char cb;
+    size_t alen = strlen(a);
     /* printf("Comparing to %s %.*s\n", a, (int)n, b); */
+    size_t l = 0;
+    printf("Comparing to %s (alen: %lu, n: %lu) '", a, alen, n);
+    for(int i = 0; i < n; i++) {
+        printf("%c", (*b)+i);
+        l++;
+    }
+    printf("' (%lu)\n", l);
     while (n-- > 0) {
         cb = *b++;
         if (cb == '\0') continue;
