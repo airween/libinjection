@@ -16,4 +16,4 @@ jobs:
           CC=clang CXX=clang++ ./configure --enable-sanitizers --enable-fuzzers
           make
       - name: fuzz
-        run: ./src/fuzz/fuzzer -max_total_time="${MAX_TOTAL_TIME:-300}" -print_pcs=1 -workers="${FUZZY_WORKERS:-0}" -jobs="${FUZZY_JOBS:-0}" ./src/fuzz/corpus 
+        run: ./src/fuzz/fuzzer -max_total_time="${MAX_TOTAL_TIME:-300}" -print_pcs=1 -workers="${FUZZY_WORKERS:-0}" -jobs="${FUZZY_JOBS:-0}" -seed=2784962097 -print_full_coverage=1 ./src/fuzz/corpus
