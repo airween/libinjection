@@ -128,9 +128,12 @@ static int html_decode_char_at(const char *src, size_t len, size_t *consumed) {
 
 /*
  * These were extracted from multiple browser sources:
- * - WebKit: https://github.com/WebKit/WebKit/blob/main/Source/WebCore/dom/EventNames.json
- * - Chromium/Blink: https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/renderer/core/dom/global_event_handlers.idl
- * - Firefox/Gecko: https://github.com/mozilla-firefox/firefox/blob/main/dom/events/EventNameList.h
+ * - WebKit:
+ * https://github.com/WebKit/WebKit/blob/main/Source/WebCore/dom/EventNames.json
+ * - Chromium/Blink:
+ * https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/renderer/core/dom/global_event_handlers.idl
+ * - Firefox/Gecko:
+ * https://github.com/mozilla-firefox/firefox/blob/main/dom/events/EventNameList.h
  * - W3C/WHATWG specifications where applicable
  *
  * view-source:
@@ -140,26 +143,35 @@ static int html_decode_char_at(const char *src, size_t len, size_t *consumed) {
  */
 static stringtype_t BLACKATTREVENT[] = {
     {"ABORT", TYPE_BLACK},
-    {"ACCESSKEYNOTFOUND", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"ACCESSKEYNOTFOUND",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"ACTIVATE", TYPE_BLACK},
     {"ACTIVE", TYPE_BLACK},
     {"ADDSOURCEBUFFER", TYPE_BLACK},
     {"ADDSTREAM", TYPE_BLACK},
     {"ADDTRACK", TYPE_BLACK},
-    {"AFTERPAINT", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"AFTERPAINT",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"AFTERPRINT", TYPE_BLACK},
-    {"AFTERSCRIPTEXECUTE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"AFTERSCRIPTEXECUTE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"ANIMATIONCANCEL", TYPE_BLACK},
     {"ANIMATIONEND", TYPE_BLACK},
     {"ANIMATIONITERATION", TYPE_BLACK},
     {"ANIMATIONSTART", TYPE_BLACK},
     {"AUDIOEND", TYPE_BLACK},
-    {"AUDIOCOMPLETE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"AUDIOCOMPLETE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"AUDIOPROCESS", TYPE_BLACK},
     {"AUDIOSTART", TYPE_BLACK},
     {"AUTOCOMPLETE", TYPE_BLACK},
     {"AUTOCOMPLETEERROR", TYPE_BLACK},
-    {"AUXCLICK", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit: EventNames.json */
+    {"AUXCLICK", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl,
+                                 WebKit: EventNames.json */
     {"BACKGROUNDFETCHABORT", TYPE_BLACK},
     {"BACKGROUNDFETCHCLICK", TYPE_BLACK},
     {"BACKGROUNDFETCHFAIL", TYPE_BLACK},
@@ -169,10 +181,14 @@ static stringtype_t BLACKATTREVENT[] = {
     {"BEFORECUT", TYPE_BLACK},
     {"BEFOREINPUT", TYPE_BLACK},
     {"BEFORELOAD", TYPE_BLACK},
-    {"BEFOREMATCH", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit: EventNames.json, Firefox: EventNameList.h */
+    {"BEFOREMATCH",
+     TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit:
+                     EventNames.json, Firefox: EventNameList.h */
     {"BEFOREPASTE", TYPE_BLACK},
     {"BEFOREPRINT", TYPE_BLACK},
-    {"BEFORESCRIPTEXECUTE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"BEFORESCRIPTEXECUTE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"BEFORETOGGLE", TYPE_BLACK},
     {"BEFOREUNLOAD", TYPE_BLACK},
     {"BEGINEVENT", TYPE_BLACK},
@@ -195,17 +211,24 @@ static stringtype_t BLACKATTREVENT[] = {
     {"COMPLETE", TYPE_BLACK},
     {"COMPOSITIONEND", TYPE_BLACK},
     {"COMPOSITIONSTART", TYPE_BLACK},
-    {"COMPOSITIONCHANGE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"COMPOSITIONCHANGE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"COMPOSITIONUPDATE", TYPE_BLACK},
-    {"COMMAND", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit: EventNames.json, Firefox: EventNameList.h */
+    {"COMMAND", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit:
+                                EventNames.json, Firefox: EventNameList.h */
     {"CONFIGURATIONCHANGE", TYPE_BLACK},
     {"CONNECT", TYPE_BLACK},
     {"CONNECTING", TYPE_BLACK},
     {"CONNECTIONSTATECHANGE", TYPE_BLACK},
     {"CONTENTVISIBILITYAUTOSTATECHANGE", TYPE_BLACK},
-    {"CONTEXTLOST", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit: EventNames.json, Firefox: EventNameList.h */
+    {"CONTEXTLOST",
+     TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit:
+                     EventNames.json, Firefox: EventNameList.h */
     {"CONTEXTMENU", TYPE_BLACK},
-    {"CONTEXTRESTORED", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit: EventNames.json, Firefox: EventNameList.h */
+    {"CONTEXTRESTORED",
+     TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit:
+                     EventNames.json, Firefox: EventNameList.h */
     {"CONTROLLERCHANGE", TYPE_BLACK},
     {"COOKIECHANGE", TYPE_BLACK},
     {"COORDINATORSTATECHANGE", TYPE_BLACK},
@@ -219,10 +242,14 @@ static stringtype_t BLACKATTREVENT[] = {
     {"DBLCLICK", TYPE_BLACK},
     {"DEQUEUE", TYPE_BLACK},
     {"DEVICECHANGE", TYPE_BLACK},
-    {"DEVICELIGHT", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"DEVICELIGHT",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"DEVICEMOTION", TYPE_BLACK},
     {"DEVICEORIENTATION", TYPE_BLACK},
-    {"DEVICEORIENTATIONABSOLUTE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"DEVICEORIENTATIONABSOLUTE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"DISCHARGINGTIMECHANGE", TYPE_BLACK},
     {"DISCONNECT", TYPE_BLACK},
     {"DISPOSE", TYPE_BLACK},
@@ -239,18 +266,29 @@ static stringtype_t BLACKATTREVENT[] = {
     {"DRAGEND", TYPE_BLACK},
     {"DRAGENTER", TYPE_BLACK},
     {"DRAGLEAVE", TYPE_BLACK},
-    {"DRAGEXIT", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, Firefox: EventNameList.h */
+    {"DRAGEXIT", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl,
+                                 Firefox: EventNameList.h */
     {"DRAGOVER", TYPE_BLACK},
     {"DRAGSTART", TYPE_BLACK},
     {"DROP", TYPE_BLACK},
     {"DURATIONCHANGE", TYPE_BLACK},
     {"EMPTIED", TYPE_BLACK},
     {"ENCRYPTED", TYPE_BLACK},
-    {"EDGEUICANCELED", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"EDGEUICOMPLETED", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"EDGEUISTARTED", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"EDITORBEFOREINPUT", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"EDITORINPUT", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"EDGEUICANCELED",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"EDGEUICOMPLETED",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"EDGEUISTARTED",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"EDITORBEFOREINPUT",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"EDITORINPUT",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"END", TYPE_BLACK},
     {"ENDED", TYPE_BLACK},
     {"ENDEVENT", TYPE_BLACK},
@@ -259,25 +297,46 @@ static stringtype_t BLACKATTREVENT[] = {
     {"ENTERPICTUREINPICTURE", TYPE_BLACK},
     {"ERROR", TYPE_BLACK},
     {"EXIT", TYPE_BLACK},
-    {"FENCEDTREECLICK", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl */
+    {"FENCEDTREECLICK",
+     TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl */
     {"FETCH", TYPE_BLACK},
     {"FINISH", TYPE_BLACK},
     {"FOCUS", TYPE_BLACK},
     {"FOCUSIN", TYPE_BLACK},
     {"FOCUSOUT", TYPE_BLACK},
-    {"FORMCHANGE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"FORMCHECKBOXSTATECHANGE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"FORMCHANGE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"FORMCHECKBOXSTATECHANGE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"FORMDATA", TYPE_BLACK},
-    {"FORMINVALID", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"FORMRADIOSTATECHANGE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"FORMRESET", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"FORMSELECT", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"FORMSUBMIT", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"FORMINVALID",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"FORMRADIOSTATECHANGE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"FORMRESET",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"FORMSELECT",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"FORMSUBMIT",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"FULLSCREENCHANGE", TYPE_BLACK},
     {"FULLSCREENERROR", TYPE_BLACK},
-    {"GAMEPADAXISMOVE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"GAMEPADBUTTONDOWN", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"GAMEPADBUTTONUP", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"GAMEPADAXISMOVE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"GAMEPADBUTTONDOWN",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"GAMEPADBUTTONUP",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"GAMEPADCONNECTED", TYPE_BLACK},
     {"GAMEPADDISCONNECTED", TYPE_BLACK},
     {"GATHERINGSTATECHANGE", TYPE_BLACK},
@@ -295,7 +354,9 @@ static stringtype_t BLACKATTREVENT[] = {
     {"ICECANDIDATEERROR", TYPE_BLACK},
     {"ICECONNECTIONSTATECHANGE", TYPE_BLACK},
     {"ICEGATHERINGSTATECHANGE", TYPE_BLACK},
-    {"IMAGEABORT", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"IMAGEABORT",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"INACTIVE", TYPE_BLACK},
     {"INPUT", TYPE_BLACK},
     {"INPUTSOURCESCHANGE", TYPE_BLACK},
@@ -308,19 +369,45 @@ static stringtype_t BLACKATTREVENT[] = {
     {"KEYUP", TYPE_BLACK},
     {"LANGUAGECHANGE", TYPE_BLACK},
     {"LEAVEPICTUREINPICTURE", TYPE_BLACK},
-    {"LEGACYATTRMODIFIED", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYCHARACTERDATAMODIFIED", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYDOMACTIVATE", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYDOMFOCUSIN", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYDOMFOCUSOUT", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYMOUSELINEORPAGESCROLL", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYMOUSEPIXELSCROLL", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYNODEINSERTED", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYNODEINSERTEDINTODOCUMENT", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYNODEREMOVED", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYNODEREMOVEDFROMDOCUMENT", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYSUBTREEMODIFIED", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"LEGACYTEXTINPUT", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
+    {"LEGACYATTRMODIFIED",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYCHARACTERDATAMODIFIED",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYDOMACTIVATE",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYDOMFOCUSIN",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYDOMFOCUSOUT",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYMOUSELINEORPAGESCROLL",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYMOUSEPIXELSCROLL",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYNODEINSERTED",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYNODEINSERTEDINTODOCUMENT",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYNODEREMOVED",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYNODEREMOVEDFROMDOCUMENT",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYSUBTREEMODIFIED",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"LEGACYTEXTINPUT",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
     {"LEVELCHANGE", TYPE_BLACK},
     {"LOAD", TYPE_BLACK},
     {"LOADEDDATA", TYPE_BLACK},
@@ -331,34 +418,66 @@ static stringtype_t BLACKATTREVENT[] = {
     {"LOADINGERROR", TYPE_BLACK},
     {"LOADSTART", TYPE_BLACK},
     {"LOSTPOINTERCAPTURE", TYPE_BLACK},
-    {"MAGNIFYGESTURE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"MAGNIFYGESTURESTART", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"MAGNIFYGESTUREUPDATE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"MAGNIFYGESTURE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"MAGNIFYGESTURESTART",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"MAGNIFYGESTUREUPDATE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"MARK", TYPE_BLACK},
-    {"MEDIARECORDERDATAAVAILABLE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"MEDIARECORDERSTOP", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"MEDIARECORDERWARNING", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"MEDIARECORDERDATAAVAILABLE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"MEDIARECORDERSTOP",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"MEDIARECORDERWARNING",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"MERCHANTVALIDATION", TYPE_BLACK},
     {"MESSAGE", TYPE_BLACK},
     {"MESSAGEERROR", TYPE_BLACK},
-    {"MOUSEDOUBLECLICK", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"MOUSEDOUBLECLICK",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"MOUSEDOWN", TYPE_BLACK},
     {"MOUSEENTER", TYPE_BLACK},
-    {"MOUSEEXPLOREBYTOUCH", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"MOUSEHITTEST", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"MOUSEEXPLOREBYTOUCH",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"MOUSEHITTEST",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"MOUSELEAVE", TYPE_BLACK},
-    {"MOUSELONGTAP", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"MOUSELONGTAP",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"MOUSEMOVE", TYPE_BLACK},
     {"MOUSEOUT", TYPE_BLACK},
     {"MOUSEOVER", TYPE_BLACK},
     {"MOUSEUP", TYPE_BLACK},
     {"MOUSEWHEEL", TYPE_BLACK},
-    {"MOZFULLSCREENCHANGE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"MOZFULLSCREENERROR", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"MOZPOINTERLOCKCHANGE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"MOZPOINTERLOCKERROR", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"MOZVISUALRESIZE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"MOZVISUALSCROLL", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"MOZFULLSCREENCHANGE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"MOZFULLSCREENERROR",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"MOZPOINTERLOCKCHANGE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"MOZPOINTERLOCKERROR",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"MOZVISUALRESIZE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"MOZVISUALSCROLL",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"MUTE", TYPE_BLACK},
     {"NAVIGATE", TYPE_BLACK},
     {"NAVIGATEERROR", TYPE_BLACK},
@@ -388,23 +507,35 @@ static stringtype_t BLACKATTREVENT[] = {
     {"PAYMENTMETHODSELECTED", TYPE_BLACK},
     {"PLAY", TYPE_BLACK},
     {"PLAYING", TYPE_BLACK},
-    {"POINTERAUXCLICK", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"POINTERAUXCLICK",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"POINTERCANCEL", TYPE_BLACK},
-    {"POINTERCLICK", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"POINTERCLICK",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"POINTERDOWN", TYPE_BLACK},
     {"POINTERENTER", TYPE_BLACK},
-    {"POINTERGOTCAPTURE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"POINTERGOTCAPTURE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"POINTERLEAVE", TYPE_BLACK},
     {"POINTERLOCKCHANGE", TYPE_BLACK},
     {"POINTERLOCKERROR", TYPE_BLACK},
-    {"POINTERLOSTCAPTURE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"POINTERLOSTCAPTURE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"POINTERMOVE", TYPE_BLACK},
     {"POINTEROUT", TYPE_BLACK},
     {"POINTEROVER", TYPE_BLACK},
-    {"POINTERRAWUPDATE", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, Firefox: EventNameList.h */
+    {"POINTERRAWUPDATE",
+     TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, Firefox:
+                     EventNameList.h */
     {"POINTERUP", TYPE_BLACK},
     {"POPSTATE", TYPE_BLACK},
-    {"PRESSTAPGESTURE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"PRESSTAPGESTURE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"PREVIOUSTRACK", TYPE_BLACK},
     {"PROPERTYCHANGE", TYPE_BLACK},
     {"PROCESSORERROR", TYPE_BLACK},
@@ -422,24 +553,42 @@ static stringtype_t BLACKATTREVENT[] = {
     {"REMOVESOURCEBUFFER", TYPE_BLACK},
     {"REMOVESTREAM", TYPE_BLACK},
     {"REMOVETRACK", TYPE_BLACK},
-    {"REPEAT", TYPE_BLACK}, /* WebKit: EventNames.json - SVG animation */
-    {"REPEATEVENT", TYPE_BLACK}, /* WebKit: EventNames.json, Firefox: EventNameList.h - SVG animation */
+    {"REPEAT", TYPE_BLACK},      /* WebKit: EventNames.json - SVG animation */
+    {"REPEATEVENT", TYPE_BLACK}, /* WebKit: EventNames.json, Firefox:
+                                    EventNameList.h - SVG animation */
     {"RESET", TYPE_BLACK},
     {"RESIZE", TYPE_BLACK},
     {"RESOURCETIMINGBUFFERFULL", TYPE_BLACK},
     {"RESULT", TYPE_BLACK},
     {"RESUME", TYPE_BLACK},
-    {"ROTATEGESTURE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"ROTATEGESTURESTART", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"ROTATEGESTUREUPDATE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"ROTATEGESTURE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"ROTATEGESTURESTART",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"ROTATEGESTUREUPDATE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"RTCTRANSFORM", TYPE_BLACK},
     {"SCROLL", TYPE_BLACK},
-    {"SCROLLEDAREACHANGED", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"SCROLLEND", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit: EventNames.json, Firefox: EventNameList.h */
-    {"SCROLLPORTOVERFLOW", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"SCROLLPORTUNDERFLOW", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
-    {"SCROLLSNAPCHANGE", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl - CSS Scroll Snap */
-    {"SCROLLSNAPCHANGING", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl - CSS Scroll Snap */
+    {"SCROLLEDAREACHANGED",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"SCROLLEND",
+     TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl, WebKit:
+                     EventNames.json, Firefox: EventNameList.h */
+    {"SCROLLPORTOVERFLOW",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"SCROLLPORTUNDERFLOW",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
+    {"SCROLLSNAPCHANGE", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl
+                                         - CSS Scroll Snap */
+    {"SCROLLSNAPCHANGING",
+     TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl - CSS Scroll Snap
+                   */
     {"SEARCH", TYPE_BLACK},
     {"SECURITYPOLICYVIOLATION", TYPE_BLACK},
     {"SEEKED", TYPE_BLACK},
@@ -456,9 +605,12 @@ static stringtype_t BLACKATTREVENT[] = {
     {"SHOW", TYPE_BLACK},
     {"SIGNALINGSTATECHANGE", TYPE_BLACK},
     {"SLOTCHANGE", TYPE_BLACK},
-    {"SMILBEGINEVENT", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - SVG/SMIL */
-    {"SMILENDEVENT", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - SVG/SMIL */
-    {"SMILREPEATEVENT", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - SVG/SMIL */
+    {"SMILBEGINEVENT",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - SVG/SMIL */
+    {"SMILENDEVENT",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - SVG/SMIL */
+    {"SMILREPEATEVENT",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - SVG/SMIL */
     {"SORT", TYPE_BLACK}, /* Chromium: Blink GlobalEventHandlers.idl */
     {"SOUNDEND", TYPE_BLACK},
     {"SOUNDSTART", TYPE_BLACK},
@@ -478,16 +630,32 @@ static stringtype_t BLACKATTREVENT[] = {
     {"STOP", TYPE_BLACK},
     {"STORAGE", TYPE_BLACK},
     {"SUBMIT", TYPE_BLACK},
-    {"SVGLOAD", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"SVGSCROLL", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"SWIPEGESTURE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"SWIPEGESTUREEND", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"SWIPEGESTUREMAYSTART", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"SWIPEGESTURESTART", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
-    {"SWIPEGESTUREUPDATE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"SVGLOAD",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"SVGSCROLL",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"SWIPEGESTURE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"SWIPEGESTUREEND",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"SWIPEGESTUREMAYSTART",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"SWIPEGESTURESTART",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
+    {"SWIPEGESTUREUPDATE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"SUCCESS", TYPE_BLACK},
     {"SUSPEND", TYPE_BLACK},
-    {"TAPGESTURE", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"TAPGESTURE",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"TEXTINPUT", TYPE_BLACK},
     {"TIMEOUT", TYPE_BLACK},
     {"TIMEUPDATE", TYPE_BLACK},
@@ -505,10 +673,14 @@ static stringtype_t BLACKATTREVENT[] = {
     {"TRANSITIONSTART", TYPE_BLACK},
     {"UNCAPTUREDERROR", TYPE_BLACK},
     {"UNHANDLEDREJECTION", TYPE_BLACK},
-    {"UNIDENTIFIEDEVENT", TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h */
+    {"UNIDENTIFIEDEVENT",
+     TYPE_BLACK}, /* Firefox: mozilla-firefox/firefox/dom/events/EventNameList.h
+                   */
     {"UNLOAD", TYPE_BLACK},
     {"UNMUTE", TYPE_BLACK},
-    {"USERPROXIMITY", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated */
+    {"USERPROXIMITY",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - deprecated
+                   */
     {"UPDATE", TYPE_BLACK},
     {"UPDATEEND", TYPE_BLACK},
     {"UPDATEFOUND", TYPE_BLACK},
@@ -520,11 +692,21 @@ static stringtype_t BLACKATTREVENT[] = {
     {"VISIBILITYCHANGE", TYPE_BLACK},
     {"VOICESCHANGED", TYPE_BLACK},
     {"VOLUMECHANGE", TYPE_BLACK},
-    {"VRDISPLAYACTIVATE", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - WebVR deprecated */
-    {"VRDISPLAYCONNECT", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - WebVR deprecated */
-    {"VRDISPLAYDEACTIVATE", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - WebVR deprecated */
-    {"VRDISPLAYDISCONNECT", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - WebVR deprecated */
-    {"VRDISPLAYPRESENTCHANGE", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - WebVR deprecated */
+    {"VRDISPLAYACTIVATE",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - WebVR
+                     deprecated */
+    {"VRDISPLAYCONNECT",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - WebVR
+                     deprecated */
+    {"VRDISPLAYDEACTIVATE",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - WebVR
+                     deprecated */
+    {"VRDISPLAYDISCONNECT",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - WebVR
+                     deprecated */
+    {"VRDISPLAYPRESENTCHANGE",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - WebVR
+                     deprecated */
     {"WAITING", TYPE_BLACK},
     {"WAITINGFORKEY", TYPE_BLACK},
     {"WEBGLCONTEXTCREATIONERROR", TYPE_BLACK},
@@ -534,7 +716,7 @@ static stringtype_t BLACKATTREVENT[] = {
     {"WEBKITANIMATIONITERATION", TYPE_BLACK},
     {"WEBKITANIMATIONSTART", TYPE_BLACK},
     {"WEBKITASSOCIATEFORMCONTROLS", TYPE_BLACK}, /* WebKit: EventNames.json */
-    {"WEBKITAUTOFILLREQUEST", TYPE_BLACK}, /* WebKit: EventNames.json */
+    {"WEBKITAUTOFILLREQUEST", TYPE_BLACK},       /* WebKit: EventNames.json */
     {"WEBKITBEFORETEXTINSERTED", TYPE_BLACK},
     {"WEBKITBEGINFULLSCREEN", TYPE_BLACK},
     {"WEBKITCURRENTPLAYBACKTARGETISWIRELESSCHANGED", TYPE_BLACK},
@@ -544,7 +726,8 @@ static stringtype_t BLACKATTREVENT[] = {
     {"WEBKITKEYADDED", TYPE_BLACK},
     {"WEBKITKEYERROR", TYPE_BLACK},
     {"WEBKITKEYMESSAGE", TYPE_BLACK},
-    {"WEBKITMEDIASESSIONMETADATACHANGED", TYPE_BLACK}, /* WebKit: EventNames.json */
+    {"WEBKITMEDIASESSIONMETADATACHANGED",
+     TYPE_BLACK}, /* WebKit: EventNames.json */
     {"WEBKITMOUSEFORCECHANGED", TYPE_BLACK},
     {"WEBKITMOUSEFORCEDOWN", TYPE_BLACK},
     {"WEBKITMOUSEFORCEUP", TYPE_BLACK},
@@ -563,13 +746,27 @@ static stringtype_t BLACKATTREVENT[] = {
     {"WRITE", TYPE_BLACK},
     {"WRITEEND", TYPE_BLACK},
     {"WRITESTART", TYPE_BLACK},
-    {"XULBROADCAST", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL specific */
-    {"XULCOMMANDUPDATE", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL specific */
-    {"XULPOPUPHIDDEN", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL specific */
-    {"XULPOPUPHIDING", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL specific */
-    {"XULPOPUPSHOWING", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL specific */
-    {"XULPOPUPSHOWN", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL specific */
-    {"XULSYSTEMSTATUSBARCLICK", TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL specific */
+    {"XULBROADCAST",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL
+                     specific */
+    {"XULCOMMANDUPDATE",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL
+                     specific */
+    {"XULPOPUPHIDDEN",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL
+                     specific */
+    {"XULPOPUPHIDING",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL
+                     specific */
+    {"XULPOPUPSHOWING",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL
+                     specific */
+    {"XULPOPUPSHOWN",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL
+                     specific */
+    {"XULSYSTEMSTATUSBARCLICK",
+     TYPE_BLACK}, /* Firefox: gecko-dev/dom/events/EventNameList.h - XUL
+                     specific */
     {"ZOOM", TYPE_BLACK},
     {NULL, TYPE_NONE}};
 
