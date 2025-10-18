@@ -188,7 +188,7 @@ int main(int argc, const char *argv[]) {
     while ((h5_result = libinjection_h5_next(&hs)) == RESULT_TRUE) {
         print_html5_token(&hs);
     }
-    
+
     /* Check for parser error */
     if (h5_result == RESULT_ERROR) {
         fprintf(stderr, "error: HTML5 parser encountered an error\n");
@@ -204,7 +204,7 @@ int main(int argc, const char *argv[]) {
     } else if (xss_result == RESULT_TRUE) {
         printf("is injection!\n");
     }
-    
+
     free(copy);
     return 0;
 }

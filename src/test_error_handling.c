@@ -3,7 +3,7 @@
  * BSD License -- see COPYING.txt for details
  *
  * Test cases for error handling with injection_result_t enum
- * 
+ *
  * This test verifies that the parser properly returns RESULT_ERROR
  * instead of calling abort() when encountering invalid states.
  */
@@ -22,19 +22,20 @@
 static int tests_run = 0;
 static int tests_passed = 0;
 
-#define TEST_START(name) \
-    do { \
-        tests_run++; \
+#define TEST_START(name)                                                       \
+    do {                                                                       \
+        tests_run++;                                                           \
         printf("Test %d: %s ... ", tests_run, name);
 
-#define TEST_END(condition) \
-        if (condition) { \
-            tests_passed++; \
-            printf("PASS\n"); \
-        } else { \
-            printf("FAIL\n"); \
-        } \
-    } while(0)
+#define TEST_END(condition)                                                    \
+    if (condition) {                                                           \
+        tests_passed++;                                                        \
+        printf("PASS\n");                                                      \
+    } else {                                                                   \
+        printf("FAIL\n");                                                      \
+    }                                                                          \
+    }                                                                          \
+    while (0)
 
 /**
  * Test that normal inputs still return RESULT_FALSE or RESULT_TRUE
@@ -46,22 +47,22 @@ static void test_normal_inputs(void) {
     const char *sqli;
     const char *xss;
     const char *html;
-    
+
     TEST_START("Normal benign input returns RESULT_FALSE");
     benign = "hello world 123";
     result = libinjection_sqli(benign, strlen(benign), fingerprint);
     TEST_END(result == RESULT_FALSE);
-    
+
     TEST_START("Normal SQLi input returns RESULT_TRUE");
     sqli = "1' OR '1'='1";
     result = libinjection_sqli(sqli, strlen(sqli), fingerprint);
     TEST_END(result == RESULT_TRUE);
-    
+
     TEST_START("Normal XSS input returns RESULT_TRUE");
     xss = "<script>alert('xss')</script>";
     result = libinjection_xss(xss, strlen(xss));
     TEST_END(result == RESULT_TRUE);
-    
+
     TEST_START("Benign HTML returns RESULT_FALSE");
     html = "<p>Hello World</p>";
     result = libinjection_xss(html, strlen(html));
@@ -76,19 +77,21 @@ static void test_edge_cases(void) {
     char fingerprint[8];
     char *long_input;
     const char *nulls;
-    
+
     TEST_START("Empty string does not cause error");
     result = libinjection_sqli("", 0, fingerprint);
     TEST_END(result != RESULT_ERROR);
-    
-    TEST_START("Very long input does not cause error");
+
     long_input = malloc(100000);
-    memset(long_input, 'A', 99999);
-    long_input[99999] = '\0';
-    result = libinjection_sqli(long_input, strlen(long_input), fingerprint);
-    free(long_input);
-    TEST_END(result != RESULT_ERROR);
-    
+    if (long_input != NULL) {
+        TEST_START("Very long input does not cause error");
+        memset(long_input, 'A', 99999);
+        long_input[99999] = '\0';
+        result = libinjection_sqli(long_input, strlen(long_input), fingerprint);
+        free(long_input);
+        TEST_END(result != RESULT_ERROR);
+    }
+
     TEST_START("NULL-like patterns are handled");
     nulls = "\0\0\0\0";
     result = libinjection_sqli(nulls, 4, fingerprint);
@@ -104,15 +107,13 @@ static void test_html5_state_handling(void) {
     const char *html;
     const char *malformed;
     char *nested;
-    size_t pos;
-    int i;
-    
+
     TEST_START("HTML5 parser initialized properly");
     html = "<div>test</div>";
     libinjection_h5_init(&hs, html, strlen(html), DATA_STATE);
     result = libinjection_h5_next(&hs);
     TEST_END(result != RESULT_ERROR);
-    
+
     TEST_START("HTML5 parser handles malformed tags");
     malformed = "<div<div>";
     libinjection_h5_init(&hs, malformed, strlen(malformed), DATA_STATE);
@@ -121,24 +122,28 @@ static void test_html5_state_handling(void) {
     }
     /* Should finish without error or with controlled error */
     TEST_END(result == RESULT_FALSE || result == RESULT_ERROR);
-    
-    TEST_START("HTML5 parser handles deeply nested tags");
+
     nested = malloc(10000);
-    pos = 0;
-    for (i = 0; i < 1000; i++) {
-        nested[pos++] = '<';
-        nested[pos++] = 'd';
-        nested[pos++] = 'i';
-        nested[pos++] = 'v';
-        nested[pos++] = '>';
+    if (nested != NULL) {
+        size_t pos = 0;
+        int i;
+
+        TEST_START("HTML5 parser handles deeply nested tags");
+        for (i = 0; i < 1000; i++) {
+            nested[pos++] = '<';
+            nested[pos++] = 'd';
+            nested[pos++] = 'i';
+            nested[pos++] = 'v';
+            nested[pos++] = '>';
+        }
+        nested[pos] = '\0';
+        libinjection_h5_init(&hs, nested, pos, DATA_STATE);
+        while ((result = libinjection_h5_next(&hs)) == RESULT_TRUE) {
+            /* Should handle without crashing */
+        }
+        free(nested);
+        TEST_END(result == RESULT_FALSE || result == RESULT_ERROR);
     }
-    nested[pos] = '\0';
-    libinjection_h5_init(&hs, nested, pos, DATA_STATE);
-    while ((result = libinjection_h5_next(&hs)) == RESULT_TRUE) {
-        /* Should handle without crashing */
-    }
-    free(nested);
-    TEST_END(result == RESULT_FALSE || result == RESULT_ERROR);
 }
 
 /**
@@ -149,26 +154,20 @@ static void test_no_abort_on_error(void) {
     injection_result_t result;
     char fingerprint[8];
     const char *patterns[] = {
-        "'''''''''''",
-        "\\\\\\\\\\\\\\\\",
-        "////////",
-        "{{{{{{{{",
-        "}}}}}}}}",
-        "[[[[[[[[",
-        "]]]]]]]]",
-        "<<<<<<<<",
-        ">>>>>>>>",
-        NULL
-    };
+        "'''''''''''", "\\\\\\\\\\\\\\\\", "////////", "{{{{{{{{", "}}}}}}}}",
+        "[[[[[[[[",    "]]]]]]]]",         "<<<<<<<<", ">>>>>>>>", NULL};
     int all_survived;
     int i;
-    
+
     TEST_START("Library does not abort on unusual patterns");
     all_survived = 1;
     for (i = 0; patterns[i] != NULL; i++) {
-        result = libinjection_sqli(patterns[i], strlen(patterns[i]), fingerprint);
-        /* Just need to survive - any result is acceptable as long as no abort */
-        if (result != RESULT_FALSE && result != RESULT_TRUE && result != RESULT_ERROR) {
+        result =
+            libinjection_sqli(patterns[i], strlen(patterns[i]), fingerprint);
+        /* Just need to survive - any result is acceptable as long as no abort
+         */
+        if (result != RESULT_FALSE && result != RESULT_TRUE &&
+            result != RESULT_ERROR) {
             all_survived = 0;
             break;
         }
@@ -183,22 +182,25 @@ static void test_backward_compatibility(void) {
     injection_result_t result;
     const char *xss;
     const char *benign;
-    
+
+    /* Cast to int to satisfy cppcheck - we're testing the actual numeric values
+     * for backward compatibility, not just enum identity */
     TEST_START("RESULT_FALSE is 0 for backward compatibility");
-    TEST_END(RESULT_FALSE == 0);
-    
+    TEST_END((int)RESULT_FALSE == 0);
+
     TEST_START("RESULT_TRUE is 1 for backward compatibility");
-    TEST_END(RESULT_TRUE == 1);
-    
+    TEST_END((int)RESULT_TRUE == 1);
+
     TEST_START("RESULT_ERROR is -1");
-    TEST_END(RESULT_ERROR == -1);
-    
+    TEST_END((int)RESULT_ERROR == -1);
+
     TEST_START("Simple if(result) check still works for detection");
     xss = "<script>alert(1)</script>";
     result = libinjection_xss(xss, strlen(xss));
-    /* Traditional code: if (result) { ... } should still work for positive detection */
+    /* Traditional code: if (result) { ... } should still work for positive
+     * detection */
     TEST_END(result); /* Should be truthy (RESULT_TRUE = 1) */
-    
+
     TEST_START("Simple !result check still works for benign");
     benign = "hello world";
     result = libinjection_xss(benign, strlen(benign));
@@ -208,18 +210,18 @@ static void test_backward_compatibility(void) {
 
 int main(void) {
     printf("=== LibInjection Error Handling Test Suite ===\n\n");
-    
+
     test_normal_inputs();
     test_edge_cases();
     test_html5_state_handling();
     test_no_abort_on_error();
     test_backward_compatibility();
-    
+
     printf("\n=== Test Summary ===\n");
     printf("Tests run:    %d\n", tests_run);
     printf("Tests passed: %d\n", tests_passed);
     printf("Tests failed: %d\n", tests_run - tests_passed);
-    
+
     if (tests_run == tests_passed) {
         printf("\nAll tests PASSED!\n");
         return 0;
