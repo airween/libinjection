@@ -540,6 +540,9 @@ static int cstrcasecmp_with_null(const char *a, const char *b, size_t n) {
     char cb;
     /* printf("Comparing to %s %.*s\n", a, (int)n, b); */
     while (n-- > 0) {
+        if (bi >= n + 1) {
+            return 1;
+        }
         cb = b[bi++];
         if (cb == '\0') {
             continue;
