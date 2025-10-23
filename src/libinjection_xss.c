@@ -672,12 +672,12 @@ static attribute_t is_black_attr(const char *s, size_t len) {
             size_t s_without_on_len = len - 2; // temporary length variable
             while (black->name != NULL) {
                 size_t black_name_len = strlen(black->name);
-                size_t max_len =
-                    (s_without_on_len < black_name_len)
-                        ? s_without_on_len
-                        : black_name_len;  // determine the maximum length to compare
-                if (cstrcasecmp_with_null(black->name, s_without_on,
-                                          max_len) == 0) {
+                // determine the maximum length to compare
+                size_t max_len = (s_without_on_len < black_name_len)
+                                     ? s_without_on_len
+                                     : black_name_len;
+                if (cstrcasecmp_with_null(black->name, s_without_on, max_len) ==
+                    0) {
                     /* printf("Got banned attribute name %s\n", black->name); */
                     return black->atype;
                 }
