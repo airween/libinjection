@@ -538,7 +538,7 @@ static int cstrcasecmp_with_null(const char *a, const char *b, size_t n) {
     unsigned int ai = 0, bi = 0;
     char ca;
     char cb;
-    printf("Comparing to '%s' '%.*s'\n", a, (int)n, b);
+    printf("Comparing with length of %d bytes '%s' to '%.*s'\n", (int)n, a, (int)n, b);
     while (n-- > 0) {
         cb = b[bi++];
         if (cb == '\0') {
