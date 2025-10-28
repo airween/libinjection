@@ -1261,7 +1261,8 @@ void libinjection_sqli_init(struct libinjection_sqli_state *sf, const char *s,
     sf->current = &(sf->tokenvec[0]);
 }
 
-static void libinjection_sqli_reset(struct libinjection_sqli_state *sf, int flags) {
+static void libinjection_sqli_reset(struct libinjection_sqli_state *sf,
+                                    int flags) {
     void *userdata = sf->userdata;
     ptr_lookup_fn lookup = sf->lookup;
 
@@ -1962,9 +1963,9 @@ int libinjection_sqli_check_fingerprint(
            libinjection_sqli_not_whitelist(sql_state);
 }
 
-static char libinjection_sqli_lookup_word(struct libinjection_sqli_state *sql_state,
-                                   int lookup_type, const char *str,
-                                   size_t len) {
+static char
+libinjection_sqli_lookup_word(struct libinjection_sqli_state *sql_state,
+                              int lookup_type, const char *str, size_t len) {
     if (lookup_type == LOOKUP_FINGERPRINT) {
         return libinjection_sqli_check_fingerprint(sql_state) ? 'X' : '\0';
     } else {
@@ -1972,7 +1973,8 @@ static char libinjection_sqli_lookup_word(struct libinjection_sqli_state *sql_st
     }
 }
 
-static int libinjection_sqli_blacklist(struct libinjection_sqli_state *sql_state) {
+static int
+libinjection_sqli_blacklist(struct libinjection_sqli_state *sql_state) {
     /*
      * use minimum of 8 bytes to make sure gcc -fstack-protector
      * works correctly
@@ -2024,7 +2026,8 @@ static int libinjection_sqli_blacklist(struct libinjection_sqli_state *sql_state
 /*
  * return TRUE if SQLi, false is benign
  */
-static int libinjection_sqli_not_whitelist(struct libinjection_sqli_state *sql_state) {
+static int
+libinjection_sqli_not_whitelist(struct libinjection_sqli_state *sql_state) {
     /*
      * We assume we got a SQLi match
      * This next part just helps reduce false positives.
