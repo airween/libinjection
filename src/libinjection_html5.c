@@ -90,7 +90,7 @@ void libinjection_h5_init(h5_state_t *hs, const char *s, size_t len,
  */
 injection_result_t libinjection_h5_next(h5_state_t *hs) {
     if (hs->state == NULL) {
-        return RESULT_ERROR;
+        return LIBINJECTION_RESULT_ERROR;
     }
     return (*hs->state)(hs);
 }
@@ -143,7 +143,7 @@ static injection_result_t h5_state_data(h5_state_t *hs) {
 
     TRACE();
     if (hs->len < hs->pos) {
-        return RESULT_ERROR;
+        return LIBINJECTION_RESULT_ERROR;
     };
     idx = (const char *)memchr(hs->s + hs->pos, CHAR_LT, hs->len - hs->pos);
     if (idx == NULL) {

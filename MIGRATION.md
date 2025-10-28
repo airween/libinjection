@@ -14,9 +14,9 @@ All detection functions now return `injection_result_t` enum instead of `int`:
 
 ```c
 typedef enum injection_result_t {
-    RESULT_FALSE = 0,   // No injection detected (benign input)
-    RESULT_TRUE = 1,    // Injection detected
-    RESULT_ERROR = -1   // Parser error (invalid state)
+    LIBINJECTION_RESULT_FALSE = 0,   // No injection detected (benign input)
+    LIBINJECTION_RESULT_TRUE = 1,    // Injection detected
+    LIBINJECTION_RESULT_ERROR = -1   // Parser error (invalid state)
 } injection_result_t;
 ```
 
@@ -76,10 +76,10 @@ int check_input(const char *input) {
     libinjection_sqli_init(&state, input, strlen(input), FLAG_NONE);
     result = libinjection_is_sqli(&state);
     
-    if (result == RESULT_ERROR) {
+    if (result == LIBINJECTION_RESULT_ERROR) {
         log_error("Parser error - treating as suspicious");
         return 1;  // Block on error (fail-safe)
-    } else if (result == RESULT_TRUE) {
+    } else if (result == LIBINJECTION_RESULT_TRUE) {
         log("SQLi detected: %s", state.fingerprint);
         return 1;  // Block request
     }
@@ -98,12 +98,12 @@ injection_result_t result;
 result = libinjection_sqli(input, len, fingerprint);
 
 // Treat error as detection (fail-safe approach)
-if (result == RESULT_TRUE || result == RESULT_ERROR) {
+if (result == LIBINJECTION_RESULT_TRUE || result == LIBINJECTION_RESULT_ERROR) {
     // Block request
     return 1;
 }
 
-return 0;  // Allow only if RESULT_FALSE
+return 0;  // Allow only if LIBINJECTION_RESULT_FALSE
 ```
 
 ### Strategy 3: Backward Compatible Check
@@ -118,7 +118,7 @@ result = libinjection_xss(input, len);
 // Old style: simple truthy check still works for detection
 // but won't distinguish error from injection
 if (result) {
-    // Handles both RESULT_TRUE and RESULT_ERROR (since -1 is truthy)
+    // Handles both LIBINJECTION_RESULT_TRUE and LIBINJECTION_RESULT_ERROR (since -1 is truthy)
     return 1;
 }
 
@@ -137,8 +137,8 @@ Recommended approach: **Fail-safe** - block on both detection and error.
 injection_result_t sqli_result = libinjection_sqli(input, len, fp);
 injection_result_t xss_result = libinjection_xss(input, len);
 
-if (sqli_result == RESULT_TRUE || sqli_result == RESULT_ERROR ||
-    xss_result == RESULT_TRUE || xss_result == RESULT_ERROR) {
+if (sqli_result == LIBINJECTION_RESULT_TRUE || sqli_result == LIBINJECTION_RESULT_ERROR ||
+    xss_result == LIBINJECTION_RESULT_TRUE || xss_result == LIBINJECTION_RESULT_ERROR) {
     
     log_security_event(input, sqli_result, xss_result);
     return HTTP_403_FORBIDDEN;
@@ -155,18 +155,18 @@ Recommended approach: **Distinguish** between detection and errors.
 injection_result_t result = libinjection_xss(input, len);
 
 switch (result) {
-    case RESULT_TRUE:
+    case LIBINJECTION_RESULT_TRUE:
         log_metric("xss.detected", 1);
         alert_security_team(input);
         break;
     
-    case RESULT_ERROR:
+    case LIBINJECTION_RESULT_ERROR:
         log_metric("xss.parser_error", 1);
         log_error("Parser error on input: %.*s", (int)len, input);
         // Continue processing - may be benign malformed input
         break;
     
-    case RESULT_FALSE:
+    case LIBINJECTION_RESULT_FALSE:
         log_metric("xss.clean", 1);
         break;
 }
@@ -179,7 +179,7 @@ Recommended approach: **Graceful degradation** with error recovery.
 ```c
 injection_result_t result = libinjection_sqli(input, len, fp);
 
-if (result == RESULT_ERROR) {
+if (result == LIBINJECTION_RESULT_ERROR) {
     // Log error but don't block - keep system running
     error_count++;
     
@@ -191,7 +191,7 @@ if (result == RESULT_ERROR) {
     return ALLOW;  // Degrade gracefully
 }
 
-return (result == RESULT_TRUE) ? BLOCK : ALLOW;
+return (result == LIBINJECTION_RESULT_TRUE) ? BLOCK : ALLOW;
 ```
 
 ## Testing Your Migration
@@ -210,13 +210,13 @@ result = libinjection_xss(input, len);
 Test with these scenarios:
 
 ```c
-// Normal detection - should return RESULT_TRUE
+// Normal detection - should return LIBINJECTION_RESULT_TRUE
 libinjection_xss("<script>alert(1)</script>", 28);
 
-// Benign input - should return RESULT_FALSE
+// Benign input - should return LIBINJECTION_RESULT_FALSE
 libinjection_xss("hello world", 11);
 
-// Edge cases that might trigger RESULT_ERROR
+// Edge cases that might trigger LIBINJECTION_RESULT_ERROR
 libinjection_xss("", 0);  // Empty string
 // Very long inputs, deeply nested structures, etc.
 ```
@@ -228,15 +228,15 @@ Verify your error handling:
 ```c
 injection_result_t result = libinjection_xss(test_input, len);
 
-assert(result == RESULT_FALSE || 
-       result == RESULT_TRUE || 
-       result == RESULT_ERROR);  // Only valid values
+assert(result == LIBINJECTION_RESULT_FALSE || 
+       result == LIBINJECTION_RESULT_TRUE || 
+       result == LIBINJECTION_RESULT_ERROR);  // Only valid values
 
 // Ensure you handle all three cases
 switch (result) {
-    case RESULT_FALSE: /* ... */ break;
-    case RESULT_TRUE:  /* ... */ break;
-    case RESULT_ERROR: /* ... */ break;
+    case LIBINJECTION_RESULT_FALSE: /* ... */ break;
+    case LIBINJECTION_RESULT_TRUE:  /* ... */ break;
+    case LIBINJECTION_RESULT_ERROR: /* ... */ break;
 }
 ```
 
@@ -246,19 +246,19 @@ switch (result) {
 
 ```c
 // WRONG - error becomes benign
-if (result == RESULT_TRUE) {
+if (result == LIBINJECTION_RESULT_TRUE) {
     block();
 }
-// RESULT_ERROR falls through as allowed!
+// LIBINJECTION_RESULT_ERROR falls through as allowed!
 ```
 
 ### ✅ Do: Explicitly handle errors
 
 ```c
 // CORRECT
-if (result == RESULT_ERROR) {
+if (result == LIBINJECTION_RESULT_ERROR) {
     handle_error();
-} else if (result == RESULT_TRUE) {
+} else if (result == LIBINJECTION_RESULT_TRUE) {
     block();
 }
 ```
@@ -267,7 +267,7 @@ if (result == RESULT_ERROR) {
 
 ```c
 // WRONG - error will pass this check
-if (result == 0) {  // Only catches RESULT_FALSE
+if (result == 0) {  // Only catches LIBINJECTION_RESULT_FALSE
     allow();
 }
 ```
@@ -276,7 +276,7 @@ if (result == 0) {  // Only catches RESULT_FALSE
 
 ```c
 // CORRECT
-if (result == RESULT_FALSE) {
+if (result == LIBINJECTION_RESULT_FALSE) {
     allow();
 }
 ```
@@ -292,11 +292,11 @@ import libinjection
 
 result = libinjection.xss(test_input)
 
-if result == -1:  # RESULT_ERROR
+if result == -1:  # LIBINJECTION_RESULT_ERROR
     handle_error()
-elif result == 1:  # RESULT_TRUE
+elif result == 1:  # LIBINJECTION_RESULT_TRUE
     block_request()
-else:  # result == 0, RESULT_FALSE
+else:  # result == 0, LIBINJECTION_RESULT_FALSE
     allow_request()
 ```
 
@@ -306,11 +306,11 @@ else:  # result == 0, RESULT_FALSE
 <?php
 $result = libinjection_xss($input);
 
-if ($result === -1) {  // RESULT_ERROR
+if ($result === -1) {  // LIBINJECTION_RESULT_ERROR
     handle_error();
-} elseif ($result === 1) {  // RESULT_TRUE
+} elseif ($result === 1) {  // LIBINJECTION_RESULT_TRUE
     block_request();
-} else {  // $result === 0, RESULT_FALSE
+} else {  // $result === 0, LIBINJECTION_RESULT_FALSE
     allow_request();
 }
 ```
@@ -322,11 +322,11 @@ local libinjection = require "libinjection"
 
 local result = libinjection.xss(input)
 
-if result == -1 then  -- RESULT_ERROR
+if result == -1 then  -- LIBINJECTION_RESULT_ERROR
     handle_error()
-elseif result == 1 then  -- RESULT_TRUE
+elseif result == 1 then  -- LIBINJECTION_RESULT_TRUE
     block_request()
-else  -- result == 0, RESULT_FALSE
+else  -- result == 0, LIBINJECTION_RESULT_FALSE
     allow_request()
 end
 ```
@@ -349,12 +349,12 @@ This was problematic for:
 
 ### The Solution in v4.0
 
-Parser errors now return `RESULT_ERROR` instead of terminating:
+Parser errors now return `LIBINJECTION_RESULT_ERROR` instead of terminating:
 
 ```c
 // v4.0 behavior
 if (hs->len < hs->pos) {
-    return RESULT_ERROR;  // Graceful error return
+    return LIBINJECTION_RESULT_ERROR;  // Graceful error return
 }
 ```
 
@@ -376,7 +376,7 @@ Use this checklist to verify your migration:
 
 - [ ] Updated all `int` return types to `injection_result_t`
 - [ ] Added `#include "libinjection_error.h"`
-- [ ] Explicitly handle `RESULT_ERROR` in all code paths
+- [ ] Explicitly handle `LIBINJECTION_RESULT_ERROR` in all code paths
 - [ ] Updated language binding code (if applicable)
 - [ ] Added tests for error conditions
 - [ ] Verified fail-safe behavior (block on error in security contexts)

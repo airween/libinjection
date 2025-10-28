@@ -39,15 +39,15 @@ int main(int argc, const char* argv[])
     libinjection_sqli_init(&state, input, slen, FLAG_NONE);
     result = libinjection_is_sqli(&state);
     
-    if (result == RESULT_ERROR) {
+    if (result == LIBINJECTION_RESULT_ERROR) {
         fprintf(stderr, "error: parser encountered an error\n");
         return -1;
-    } else if (result == RESULT_TRUE) {
+    } else if (result == LIBINJECTION_RESULT_TRUE) {
         fprintf(stderr, "sqli detected with fingerprint of '%s'\n", state.fingerprint);
         return 1;
     }
     
-    /* RESULT_FALSE - no SQLi detected */
+    /* LIBINJECTION_RESULT_FALSE - no SQLi detected */
     return 0;
 }
 ```
@@ -88,15 +88,15 @@ As of version 4.0.0, libinjection uses an `injection_result_t` enum for return v
 
 ```c
 typedef enum injection_result_t {
-    RESULT_FALSE = 0,   // No injection detected (benign input)
-    RESULT_TRUE = 1,    // Injection detected
-    RESULT_ERROR = -1   // Parser error (invalid state)
+    LIBINJECTION_RESULT_FALSE = 0,   // No injection detected (benign input)
+    LIBINJECTION_RESULT_TRUE = 1,    // Injection detected
+    LIBINJECTION_RESULT_ERROR = -1   // Parser error (invalid state)
 } injection_result_t;
 ```
 
-**Important:** Prior to v4.0.0, libinjection would call `abort()` and terminate the process when encountering parser errors. Now it returns `RESULT_ERROR` instead, allowing your application to handle errors gracefully.
+**Important:** Prior to v4.0.0, libinjection would call `abort()` and terminate the process when encountering parser errors. Now it returns `LIBINJECTION_RESULT_ERROR` instead, allowing your application to handle errors gracefully.
 
-**Backward Compatibility:** The enum values `RESULT_FALSE` (0) and `RESULT_TRUE` (1) maintain backward compatibility with code that checks for true/false values. However, applications should be updated to handle `RESULT_ERROR` (-1) to prevent treating parser errors as benign input.
+**Backward Compatibility:** The enum values `LIBINJECTION_RESULT_FALSE` (0) and `LIBINJECTION_RESULT_TRUE` (1) maintain backward compatibility with code that checks for true/false values. However, applications should be updated to handle `LIBINJECTION_RESULT_ERROR` (-1) to prevent treating parser errors as benign input.
 
 **Migration:** See [MIGRATION.md](MIGRATION.md) for guidance on updating existing code.
 

@@ -14,9 +14,9 @@ extern "C" {
 #endif
 
 typedef enum injection_result_t {
-    RESULT_FALSE = 0,
-    RESULT_TRUE = 1,
-    RESULT_ERROR = -1
+    LIBINJECTION_RESULT_FALSE = 0,
+    LIBINJECTION_RESULT_TRUE = 1,
+    LIBINJECTION_RESULT_ERROR = -1
 } injection_result_t;
 
 #ifdef __cplusplus

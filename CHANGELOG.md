@@ -8,9 +8,9 @@ This is a major version release with **breaking API changes**. Applications usin
 
 * [#65](https://github.com/libinjection/libinjection/pull/65) [#27](https://github.com/libinjection/libinjection/issues/27) **BREAKING:** Changed return type from `int` to `injection_result_t` enum for all detection functions
 * **CRITICAL:** libinjection no longer calls `abort()` and terminates the process on parser errors
-* **NEW:** Functions now return `RESULT_ERROR` (-1) when parser encounters an invalid state, allowing graceful error handling
-* **BACKWARD COMPATIBLE:** `RESULT_FALSE` (0) and `RESULT_TRUE` (1) maintain numeric compatibility with old boolean return values
-* **IMPORTANT:** Applications must be updated to check for and handle `RESULT_ERROR` to avoid treating parser errors as benign input
+* **NEW:** Functions now return `LIBINJECTION_RESULT_ERROR` (-1) when parser encounters an invalid state, allowing graceful error handling
+* **BACKWARD COMPATIBLE:** `LIBINJECTION_RESULT_FALSE` (0) and `LIBINJECTION_RESULT_TRUE` (1) maintain numeric compatibility with old boolean return values
+* **IMPORTANT:** Applications must be updated to check for and handle `LIBINJECTION_RESULT_ERROR` to avoid treating parser errors as benign input
 
 ### Affected Functions
 * `libinjection_xss()` - now returns `injection_result_t`
