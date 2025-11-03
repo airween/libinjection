@@ -89,7 +89,7 @@ void libinjection_h5_init(h5_state_t *hs, const char *s, size_t len,
  * public function
  */
 injection_result_t libinjection_h5_next(h5_state_t *hs) {
-    if (hs->state == NULL) {
+    if (hs == NULL || hs->state == NULL) {
         return LIBINJECTION_RESULT_ERROR;
     }
     return (*hs->state)(hs);
