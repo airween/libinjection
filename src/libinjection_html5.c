@@ -142,7 +142,7 @@ static injection_result_t h5_state_data(h5_state_t *hs) {
     const char *idx;
 
     TRACE();
-    if (hs->len < hs->pos) {
+    if (hs == NULL || hs->len < hs->pos) {
         return LIBINJECTION_RESULT_ERROR;
     };
     idx = (const char *)memchr(hs->s + hs->pos, CHAR_LT, hs->len - hs->pos);
