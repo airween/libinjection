@@ -41,7 +41,7 @@ int main(int argc, const char* argv[])
     
     if (result == LIBINJECTION_RESULT_ERROR) {
         fprintf(stderr, "error: parser encountered an error\n");
-        return -1;
+        return 2;
     } else if (result == LIBINJECTION_RESULT_TRUE) {
         fprintf(stderr, "sqli detected with fingerprint of '%s'\n", state.fingerprint);
         return 1;
