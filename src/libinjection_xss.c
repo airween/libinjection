@@ -60,7 +60,7 @@ static int html_decode_char_at(const char *src, size_t len, size_t *consumed) {
     }
 
     *consumed = 1;
-    if (*src != '&' || len < 2) {
+    if (*src != '&' || len < 3) {
         return (unsigned char)(*src);
     }
 
