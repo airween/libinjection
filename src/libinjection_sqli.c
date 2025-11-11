@@ -44,7 +44,7 @@
 /* faster than calling out to libc isdigit */
 #define ISDIGIT(a) ((unsigned)((a) - '0') <= 9)
 
-#if 0
+#ifdef DEBUG
 #define FOLD_DEBUG                                                             \
     printf("%d \t more=%d  pos=%d left=%d\n", __LINE__, more, (int)pos,        \
            (int)left);
@@ -1172,16 +1172,22 @@ static size_t parse_number(struct libinjection_sqli_state *sf) {
         }
     }
 
-    if (have_e == 1 && have_exp == 0) {
-        /* very special form of
-         * "1234.e"
-         * "10.10E"
-         * ".E"
-         * this is a WORD not a number!! */
-        st_assign(sf->current, TYPE_BAREWORD, start, pos - start, cs + start);
-    } else {
+    /* very special form of
+     * "1234.e"
+     * "10.10E"
+     * ".E"
+     *
+     * https://gosecure.ai/blog/2021/10/19/a-scientific-notation-bug-in-mysql-left-aws-waf-clients-vulnerable-to-sql-injection/
+     * In this blog post, we can see that 1.e or 1.E is a risky SQLI. The SQL
+     * parser ignores it during parsing. For example, "1.e(1)" => (1), 1 1.e/1
+     * => 1/1, etc. So, if a payload like "1' or 1.e(1)" bypasses SQLI
+     * detection, which is really risky, then we should detect such SQLI
+     * injection in case of WAF bypass.
+     */
+    if (!(have_e == 1 && have_exp == 0)) {
         st_assign(sf->current, TYPE_NUMBER, start, pos - start, cs + start);
     }
+
     return pos;
 }
 
@@ -2318,7 +2324,8 @@ int libinjection_is_sqli(struct libinjection_sqli_state *sql_state) {
     return FALSE;
 }
 
-int libinjection_sqli(const char *s, size_t slen, char fingerprint[]) {
+injection_result_t libinjection_sqli(const char *s, size_t slen,
+                                     char fingerprint[]) {
     int issqli;
     struct libinjection_sqli_state state;
 
