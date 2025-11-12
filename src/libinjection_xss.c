@@ -80,10 +80,10 @@ static int html_decode_char_at(const char *src, size_t len, size_t *consumed) {
 
     *consumed = 1;
     /*
-     * check if it starts with '&' and len >=2
+     * check if it starts with '&' and len >=3
      * if not, return the character itself
      */
-    if (*src != '&' || len < 2) {
+    if (*src != '&' || len < 3) {
         return (unsigned char)(*src);
     }
 
