@@ -80,10 +80,11 @@ static int html_decode_char_at(const char *src, size_t len, size_t *consumed) {
 
     *consumed = 1;
     /*
-     * check if it starts with '&' and len >=3
+     * check if it starts with '&' and
+     * len >=3 or src[2] == 'x'/'X' and len >=4
      * if not, return the character itself
      */
-    if (*src != '&' || len < 3) {
+    if (*src != '&' || len < 3 || (IS_HEX_ENTITY_PREFIX(src) && len < 4)) {
         return (unsigned char)(*src);
     }
 
@@ -96,19 +97,6 @@ static int html_decode_char_at(const char *src, size_t len, size_t *consumed) {
          * but for this case we don't actually care
          */
         return '&';
-    }
-
-    /*
-     * check if it is hexadecimal or decimal and the required minimum length
-     *
-     * for hex '&#x' we need at least 4 characters
-     * for dec '&#' we need at least 3 characters
-     *
-     * if not, return the character itself
-     */
-    if ((IS_HEX_ENTITY_PREFIX(src) && len < 4) ||
-        (!IS_HEX_ENTITY_PREFIX(src) && len < 3)) {
-        return (unsigned char)(*src);
     }
 
     // if there's a hex prefix
